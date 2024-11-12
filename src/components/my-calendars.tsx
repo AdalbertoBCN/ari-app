@@ -7,6 +7,7 @@ import { SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton,
 import { ScrollArea } from "./ui/scroll-area"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useDepends } from "@/hooks/useDenpends"
+import { revalidatePath } from 'next/cache'
 
 export function Calendars() {
   const { 
@@ -28,10 +29,12 @@ export function Calendars() {
         <div className="flex items-center justify-between px-2 py-1.5">
           <CollapsibleTrigger className="flex flex-1 items-center">
             <ChevronRight className="mr-1 size-4 shrink-0 transition-transform group-data-[state=open]/collapsible:rotate-90" />
-            <span className="truncate">My Calendars</span>
+            <span className="truncate">
+              Meus Calendários
+            </span>
           </CollapsibleTrigger>
           <div className="flex items-center space-x-1">
-            <TooltipProvider>
+            <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -43,11 +46,11 @@ export function Calendars() {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Only User</p>
+                  <p>Só eu</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <TooltipProvider>
+            <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -59,11 +62,11 @@ export function Calendars() {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Remove All Dependents</p>
+                  <p>Ninguém</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <TooltipProvider>
+            <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -75,7 +78,7 @@ export function Calendars() {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Add All Dependents</p>
+                  <p>Todos</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

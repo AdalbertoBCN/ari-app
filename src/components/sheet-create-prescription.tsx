@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetDescription,
     SheetFooter,
@@ -44,6 +45,9 @@ interface SheetPrescriptionProps {
 export function SheetPrescription({ children }: SheetPrescriptionProps) {
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm<PrescriptionType>({
         resolver: zodResolver(PrescriptionSchema),
+        defaultValues: {
+            frequencyHours: 1, // Valor padrão para frequencyHours
+        },
     })
 
     const [dependents, setDependents] = useState<Dependents[]>([])
@@ -82,7 +86,10 @@ export function SheetPrescription({ children }: SheetPrescriptionProps) {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    ...data,
+                    frequencyHours: Number(data.frequencyHours), // Garantir que frequencyHours seja um número
+                }),
             })
 
             if (response.ok) {
@@ -112,10 +119,10 @@ export function SheetPrescription({ children }: SheetPrescriptionProps) {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 py-4">
                     {/* Select para Dependente */}
                     <div className="space-y-2">
-                        <Label>Dependente</Label>
+                        <Label>Usuário</Label>
                         <Select onValueChange={(value) => setValue("userId", parseInt(value))}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Selecione um dependente" />
+                                <SelectValue placeholder="Selecione um usuário" />
                             </SelectTrigger>
                             <SelectContent>
                                 {dependents.map((dependent) => (
@@ -182,9 +189,11 @@ export function SheetPrescription({ children }: SheetPrescriptionProps) {
                     </div>
 
                     <SheetFooter>
-                        <Button variant="outline" onClick={() => setIsOpen(false)}>
-                            Cancelar
-                        </Button>
+                        <SheetClose asChild>
+                            <Button variant="outline" onClick={() => setIsOpen(false)}>
+                                Cancelar
+                            </Button>
+                        </SheetClose>
                         <Button type="submit">Criar</Button>
                     </SheetFooter>
                 </form>

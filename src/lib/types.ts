@@ -44,3 +44,9 @@ export interface History {
         dateIngestion: string;
     }[];
 }
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+}

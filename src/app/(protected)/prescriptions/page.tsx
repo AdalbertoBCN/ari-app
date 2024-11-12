@@ -10,6 +10,7 @@ export default async function Medicines(){
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
+        cache: "no-cache"
     }).then((res) => res.json());
     
     return (

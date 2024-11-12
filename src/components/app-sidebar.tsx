@@ -39,9 +39,11 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
       <div className="flex items-center space-x-3">
+        <Link href="/">
           <div className="flex h-10 w-10 aspect-square items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Watch className="h-6 w-6" />
           </div>
+        </Link>
           <div>
             <h1 className="text-lg font-semibold leading-none tracking-tight">
               ARI

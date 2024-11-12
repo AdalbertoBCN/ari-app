@@ -1,7 +1,7 @@
 "use client"
 import { removeLoginToken } from "@/actions/cookiesActions"
 import { useUser } from "@/hooks/useUser"
-import { ChevronsUpDown, LogOut } from "lucide-react"
+import { ChevronsUpDown, Link, LogOut, User } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
@@ -15,6 +15,10 @@ export function NavUser() {
     async function handleLogout() {
       await removeLoginToken();
       push("/login");
+    }
+
+    function handleProfile() {
+      push("/profile");
     }
 
     return (
@@ -56,9 +60,15 @@ export function NavUser() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {/* Perfil */}
+              <DropdownMenuItem onClick={handleProfile}>
+                <User className="mr-2 h-4 w-4" />
+                <span className="truncate">Perfil</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span className="truncate">Log out</span>
+                <span className="truncate">Sair</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

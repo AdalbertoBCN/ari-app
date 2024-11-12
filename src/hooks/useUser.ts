@@ -5,10 +5,11 @@ import { userIsLoged } from "@/actions/userActions";
 import { useDepends } from "./useDenpends";
 
 export function useUser() {
-    const [user, setUser] = useState<{ id: number, name: string, email: string }>({
+    const [user, setUser] = useState<{ id: number, name: string, email: string, birthDate:string }>({
         id: 0,
         name: "",
-        email: ""
+        email: "",
+        birthDate: "",
     });
 
     const { setDependents } = useDepends();
@@ -25,7 +26,7 @@ export function useUser() {
                 }
             });
 
-            const data = await response.json() as { user: { id: number, name: string, email: string } };
+            const data = await response.json() as { user: { id: number, name: string, email: string, birthDate:string } };
             
             setDependents(data.user, token);
 

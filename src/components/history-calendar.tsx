@@ -202,6 +202,9 @@ export function HistoryCalendar({ history }: HistoryCalendarProps = { history: [
                         {filteredHistory.map((history) => {
                             const status = getMedicineStatus(history, selectedDate)
                             const log = history.logs.find((log) => isSameDay(new Date(log.dateIngestion), selectedDate))
+
+                            if(!isAfter(selectedDate, addDays(new Date(history.startDate), -1)) || !isBefore(selectedDate, addDays(new Date(history.endDate), 1)) ) return <div key={history.id}>{history.userName}: Sem Prescrições</div>
+
                             return (
                                 <li key={history.medicineId} className="flex flex-col md:flex-row md:items-center md:justify-between">
                                     <div className="flex-1">

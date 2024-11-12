@@ -119,6 +119,7 @@ export function PrescriptionTable({ prescriptions }: PrescriptionTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
+          
             {filteredPrescriptions.map(pres => (
               <TableRow key={pres.id}>
                 <TableCell className="py-3">
